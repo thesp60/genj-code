@@ -24,6 +24,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.imageio.spi.ServiceRegistry;
+import java.util.ServiceLoader;
 
 /**
  * A service that can provide options
@@ -93,7 +94,9 @@ public abstract class OptionProvider {
    * Lookup providers where considering
    */
   private static Iterator<OptionProvider> lookupProviders() {
-    return ServiceRegistry.lookupProviders(OptionProvider.class);
+    //return ServiceRegistry.lookupProviders(OptionProvider.class);
+    ServiceLoader<OptionProvider> loader = ServiceLoader.load(OptionProvider.class);
+    return loader.iterator();
   }
 
 } //OptionProvider
